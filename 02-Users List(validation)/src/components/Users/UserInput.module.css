@@ -1,0 +1,26 @@
+.input {
+    margin: 2.3rem auto;
+    width: 100%;
+    max-width: 40rem;
+    padding: 0.3rem 1rem;
+}
+
+.userInputBox {
+    margin: 1rem 0;
+}
+
+.userInput {
+    width: 100%;
+    padding: 0.3rem 0;
+    margin-top: 0.4rem;
+    border: 1px solid #ccc;
+}
+
+.userInput:focus {
+    outline: none;
+    border: 1px solid #4f005f;
+}
+
+.userInputLabel {
+   font-weight: bold;
+}
