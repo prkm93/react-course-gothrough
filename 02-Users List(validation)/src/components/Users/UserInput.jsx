@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import styles from "./UserInput.module.css";
 import Card from "../UI/Card";
 import Button from '../UI/Button';
@@ -9,9 +9,14 @@ function UserInput(props) {
   const [userName, setUserName] = useState('');
   const [age, setAge] = useState('');
 
+  const nameInputRef = useRef(null);
+  const ageInputRef = useRef(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    console.log(nameInputRef);
+    console.log(ageInputRef);
 
     if (validateInput(userName, age)) {
         props.onAddUser(userName, age);
@@ -24,35 +29,45 @@ function UserInput(props) {
   const validateInput = (name,userAge) => {
 
     if (!name || !userAge) {
+
       props.onError({
           title: "No inputs",
           message: "Please enter name and age both (non-empty values)"
       });
       return false;
+
     } else if (!(/[a-z]/i.test(name))) {
+
       props.onError({
           title: "Invalid name",
           message:"Please enter valid name"
       });
       return false; 
+
     } else if (!(/\d/.test(age))) {
+
       props.onError({
         title: "Invalid age",
         message:"Please enter valid age"
     });
       return false;
+
     } else if (Number(userAge) < 1) {
+
       props.onError({
           title: "Invalid age",
           message: "Please enter a valid age ( ) > 0)"
       });
       return false;
+
     } else {
+
       props.onError({
           title:"",
           message: ""
       });
       return true;
+
     }
 
   } 
@@ -71,6 +86,7 @@ function UserInput(props) {
                     type="text" 
                     name="username" 
                     id="username" 
+                    ref={nameInputRef}
                     value={userName}
                     className={styles.userInput}
                     onChange={e =>  setUserName(e.target.value)}
@@ -87,6 +103,7 @@ function UserInput(props) {
                     type="text" 
                     name="age" 
                     id="age" 
+                    ref={ageInputRef}
                     value={age}
                     className={styles.userInput}
                     onChange={e => setAge(e.target.value)}

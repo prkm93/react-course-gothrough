@@ -1,13 +1,34 @@
-import React, { useState  } from 'react'
+import React, { useState } from 'react';
+import ReactDOM  from 'react-dom';
 import Card from './Card';
 import Button from "./Button";
 import styles from "./ErrorMessage.module.css";
 import { useEffect } from 'react';
 
 
-function ErrorMessage(props) {
+const BackDrop = (props) => {
+  return <div className={styles.backdrop} onClick={props.onClose}/>
+}
 
-  console.log("props", props);
+const ModalOverlay = (props) => {
+
+  return (
+    <Card className={styles.modal}>
+      <header className={styles.header}>
+        <h2>{props.title}</h2>
+      </header>
+      <div className={styles.content}>
+        <p>{props.message}</p>
+      </div>
+      <footer className={styles.actions}>
+        <Button onClick={props.onClose}>Okay</Button>
+      </footer>
+    </Card>
+  )
+}
+
+const ErrorMessage = (props) => {
+
   const { title, message } = props.error;
   const [show, setShow] = useState(false);
 
@@ -17,22 +38,27 @@ function ErrorMessage(props) {
     }
   }, [props.error]);
 
+  const onCloseHandler = () => {
+    setShow(false);
+  }
+
   return (
-      show
+     show
         &&
-      <div className={styles.backdrop} onClick={() => setShow(false)}>
-        <Card className={styles.modal}>
-          <header className={styles.header}>
-            <h2>{title}</h2>
-          </header>
-          <div className={styles.content}>
-            <p>{message}</p>
-          </div>
-          <footer className={styles.actions}>
-            <Button onClick={() => setShow(false)}>Okay</Button>
-          </footer>
-        </Card>
-      </div>
+      <>
+       {
+          ReactDOM.createPortal(
+          <BackDrop onClose={onCloseHandler}/>, 
+          document.getElementById('backdrop-root')
+          )
+        }
+       {
+         ReactDOM.createPortal(
+           <ModalOverlay title={title} message={message} onClose={onCloseHandler}/>,
+           document.getElementById('overlay-root')
+         )
+       }
+      </>
   );
 }
 
