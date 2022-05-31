@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from  "./Header.module.css";
-import Modal from "../UI/Modal";
 import mealsImage from "../../assets/meals.jpeg";
 import HeaderCartButton from './HeaderCartButton';
  
-const Header = () => {
-  const [showModal, setShowModal]  = useState(false);
-
+const Header = (props) => {
 
   return (
     <>
-      {showModal ? <Modal/> : ""}
-      <header className={styles.header} onClick={() => setShowModal(true)}>
+      <header className={styles.header}>
           <h2>ReactMeals</h2>
-          <HeaderCartButton/>
+          <HeaderCartButton onShowCart={props.onShowCart}/>
       </header>
       <div className={styles['main-image']}>
           <img src={mealsImage} alt="a table full of delicious food"/>

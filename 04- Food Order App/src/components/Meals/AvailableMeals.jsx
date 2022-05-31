@@ -1,6 +1,5 @@
 
 import React from 'react';
-import MealsSummary from "./MealsSummary";
 import styles from "./AvailableMeals.module.css";
 import MealItem from './MealItem/MealItem';
 import Card from '../UI/Card';
@@ -44,7 +43,9 @@ const AvailableMeals = () => {
   return (
     <section className={styles.meals}>
       <Card>
-       <ul>{mealLists}</ul> 
+       <ul>
+         {mealLists}
+       </ul> 
       </Card>
     </section>
   );
