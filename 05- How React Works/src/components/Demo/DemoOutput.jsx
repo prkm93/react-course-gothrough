@@ -1,4 +1,5 @@
 import React from 'react'
+import MyParagraph from './MyParagraph';
 
 /**
  * 
@@ -13,7 +14,7 @@ function DemoOutput(props) {
   console.log("DEMO output running");
 
   return (
-    <p>{props.show ? 'This is new paragraph' : ''}</p>
+    <MyParagraph>{props.show ? 'This is new paragraph' : ''}</MyParagraph>
   )
 }
 

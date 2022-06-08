@@ -5,7 +5,7 @@ import classes from './Button.module.css';
 const Button = (props) => {
 
   console.log("BUTTON COMP");
-  
+
   return (
     <button
       type={props.type || 'button'}
