@@ -1,6 +1,6 @@
  import useInput from "../hooks/use-input";
 
-const SimpleInput = (props) => {
+const SimpleInput = () => {
   
   const { 
     value : enteredName, 
@@ -11,7 +11,7 @@ const SimpleInput = (props) => {
     reset: resetNameInput
   } = useInput(value => value.trim() !== '');
 
-  const {
+  const { 
     value: enteredEmail,
     isValid: enteredEmailIsValid,
     hasError: emailInputHasError,
