@@ -50,6 +50,7 @@ const SimpleInput = () => {
         <input
           type='text' 
           id='name'
+          value={enteredName}
           onChange={nameChangeHandler}
           onBlur={nameBlurHandler}
         />
@@ -60,6 +61,7 @@ const SimpleInput = () => {
         <input
           type='email' 
           id='email'
+          value={enteredEmail}
           onChange={emailChangeHandler}
           onBlur={emailBlurHandler}
         />

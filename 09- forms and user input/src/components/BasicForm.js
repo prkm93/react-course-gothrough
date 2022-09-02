@@ -1,5 +1,11 @@
 import useInput from "../hooks/use-input";
 
+const isEmpty = value => value.trim() !== '';
+const isEmail = value => {
+  let re = /\S+@\S+\.\S+/;
+  return re.test(value);
+};
+
 const BasicForm = () => {
 
   const {
@@ -9,7 +15,7 @@ const BasicForm = () => {
     inputChangeHandler: firstNameHandler,
     inputBlurHandler: firstNameBlurHandler,
     reset: resetFirstNameInput
-  } = useInput(value => value.trim() !== '');
+  } = useInput(isEmpty);
 
   const {
     value: lastName,
@@ -18,7 +24,7 @@ const BasicForm = () => {
     inputChangeHandler: lastNameHandler,
     inputBlurHandler: lastNameBlurHandler,
     reset: resetLastNameInput
-  } = useInput(value => value.trim() !== '');
+  } = useInput(isEmpty);
 
   const {
     value: email,
@@ -27,10 +33,7 @@ const BasicForm = () => {
     inputChangeHandler: emailInputHandler,
     inputBlurHandler: emailBlurHandler,
     reset: resetEmailInput
-  } = useInput(value => {
-    let re = /\S+@\S+\.\S+/;
-    return re.test(value);
-  });
+  } = useInput(isEmail);
 
   let formIsValid = false;
 
@@ -57,7 +60,8 @@ const BasicForm = () => {
           <label htmlFor='firstName'>First Name</label>
           <input 
             type='text' 
-            id='firstName' 
+            id='firstName'
+            value={firstName} 
             onChange={firstNameHandler} 
             onBlur={firstNameBlurHandler}
           />
@@ -67,7 +71,8 @@ const BasicForm = () => {
           <label htmlFor='lastName'>Last Name</label>
           <input 
             type='text' 
-            id='lastName' 
+            id='lastName'
+            value={lastName} 
             onChange={lastNameHandler}
             onBlur={lastNameBlurHandler}
           />
@@ -79,6 +84,7 @@ const BasicForm = () => {
         <input 
           type='text' 
           id='email'
+          value={email}
           onChange={emailInputHandler} 
           onBlur={emailBlurHandler}
           />
